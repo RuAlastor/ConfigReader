@@ -36,8 +36,7 @@ namespace Common
 
     public METHODS:
         ConfigReader()  = default;
-        explicit ConfigReader( std::string&& cfgFname ) noexcept( true )
-            : _cfgFname( std::forward< std::string >( cfgFname ) ) {}
+        explicit ConfigReader( std::string&& cfgFname ) noexcept( true );
 
         ConfigReader            ( const ConfigReader& ) = delete;
         ConfigReader& operator= ( const ConfigReader& ) = delete;
@@ -53,7 +52,6 @@ namespace Common
 
     protected METHODS:
         virtual errorList   _initialize() noexcept( true ) = 0;
-        virtual char*       _readFile()   noexcept( true ) = 0;
         virtual errorList   _clear()      noexcept( true ) = 0;
 
     //------------------------------------------------------------------------

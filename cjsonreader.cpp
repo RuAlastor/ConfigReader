@@ -1,7 +1,6 @@
 #include "cjsonreader.h"
 
 #include <cstdio>
-#include <memory>
 
 extern "C"
 {
@@ -30,8 +29,12 @@ using namespace Common;
 
 //------------------------------------------------------------------------
 
+BaseCJSONReader::BaseCJSONReader() noexcept( false ) : _json( nullptr ) {}
+
+//------------------------------------------------------------------------
+
 BaseCJSONReader::BaseCJSONReader( std::string&& cjsonName ) noexcept( false )
-    : ConfigReader( std::forward< std::string >( cjsonName ) )
+    : ConfigReader( std::forward< std::string >( cjsonName ) ), _json( nullptr )
 {
     auto localRes = errorList::noError;
     runSafelyException( _initialize() );
@@ -148,6 +151,21 @@ BaseCJSONReader::errorList BaseCJSONReader::_clear() noexcept( true )
 BaseCJSONReader::~BaseCJSONReader() noexcept( true )
 {
     /*[[maybe_unused]] auto localRes =*/ _clear();
+}
+
+//------------------------------------------------------------------------
+
+const char* BaseCJSONReaderException::what() const noexcept( true )
+{
+    switch ( _errorNumber )
+    {
+    case ConfigReader::errorList::initError:
+    { return "Init error!\n"; }
+    case ConfigReader::errorList::readingError:
+    { return "Reading error!\n"; }
+    default:
+    { return "Undefined error!\n"; }
+    }
 }
 
 //------------------------------------------------------------------------

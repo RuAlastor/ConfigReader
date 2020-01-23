@@ -15,4 +15,9 @@ HEADERS += \
     cjson.h \
     xmlreader.h
 
+INCLUDEPATH += /usr/include/libxml++-2.6
+
 DISTFILES +=
+
+unix: CONFIG += link_pkgconfig
+unix: PKGCONFIG += libxml++-2.6

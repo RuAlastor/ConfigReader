@@ -36,17 +36,21 @@ namespace Common
         BaseCJSONReader() noexcept( false );
         explicit BaseCJSONReader( std::string&& ) noexcept( false );
 
-        virtual errorList parse( dataContainer& )                   noexcept( true ) = 0;
-        virtual errorList parse( std::string&&, dataContainer& )    noexcept( true ) = 0;
+        virtual errorList parse( dataContainer& )                   noexcept( true ) override = 0;
+        virtual errorList parse( std::string&&, dataContainer& )    noexcept( true ) override = 0;
 
-        virtual ~BaseCJSONReader() noexcept( true );
+        virtual ~BaseCJSONReader() noexcept( true ) override;
 
     //------------------------------------------------------------------------
 
     protected METHODS:
-        virtual errorList   _initialize() noexcept( true ) override;
-        virtual char*       _readFile()   noexcept( true ) override;
-        virtual errorList   _clear()      noexcept( true ) override;
+        virtual errorList   _initialize()   noexcept( true ) override;
+        virtual errorList   _clear()        noexcept( true ) override;
+
+    //------------------------------------------------------------------------
+
+    private METHODS:
+        char* _readFile() noexcept( true );
 
     //------------------------------------------------------------------------
 
@@ -77,18 +81,7 @@ namespace Common
         thisClass( thisClass&& )                = default;
         thisClass& operator= ( thisClass&& )    = default;
 
-        virtual const char* what() const noexcept( true ) override
-        {
-            switch ( _errorNumber )
-            {
-            case ConfigReader::errorList::initError:
-            { return "Init error!\n"; }
-            case ConfigReader::errorList::readingError:
-            { return "Reading error!\n"; }
-            default:
-            { return "Undefined error!\n"; }
-            }
-        }
+        virtual const char* what() const noexcept( true ) override;
 
         //------------------------------------------------------------------------
 
