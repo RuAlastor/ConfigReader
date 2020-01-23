@@ -61,9 +61,20 @@ namespace Common
     class BaseCJSONReaderException : public std::exception
     {
 
+        //------------------------------------------------------------------------
+
+        #define thisClass BaseCJSONReaderException
+
+        //------------------------------------------------------------------------
+
     public METHODS:
-        explicit BaseCJSONReaderException( ConfigReader::errorList errorNum ) noexcept( true ) :
+        explicit thisClass( ConfigReader::errorList errorNum ) noexcept( true ) :
             _errorNumber( errorNum ) {}
+
+        thisClass( const thisClass& )               = default;
+        thisClass& operator= ( const thisClass& )   = default;
+        thisClass( thisClass&& )                = default;
+        thisClass& operator= ( thisClass&& )    = default;
 
         virtual const char* what() const noexcept( true ) override
         {
@@ -78,8 +89,16 @@ namespace Common
             }
         }
 
+        //------------------------------------------------------------------------
+
     protected ATTRIBUTES:
         ConfigReader::errorList _errorNumber;
+
+        //------------------------------------------------------------------------
+
+        #undef thisClass
+
+        //------------------------------------------------------------------------
 
     }; // class BaseCJSONReaderException
 

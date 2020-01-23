@@ -1,6 +1,7 @@
 #include "cjsonreader.h"
 
 #include <cstdio>
+#include <memory>
 
 extern "C"
 {
@@ -20,7 +21,7 @@ extern "C"
 {                                                       \
     localRes = funcToRun;                               \
     if ( localRes != errorList::noError )               \
-    { throw new BaseCJSONReaderException( localRes ); } \
+    { throw BaseCJSONReaderException( localRes ); } \
 }
 
 //------------------------------------------------------------------------
