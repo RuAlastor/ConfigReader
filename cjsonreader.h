@@ -4,6 +4,7 @@
 #include "configreader.h"
 
 #include <exception>
+#include <string>
 
 #define ABSTRACT
 #define EXCEPTION

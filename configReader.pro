@@ -5,9 +5,14 @@ CONFIG -= qt
 
 SOURCES += main.cpp \
     cjsonreader.cpp \
-    cjson.c
+    cjson.c \
+    configreader.cpp \
+    xmlreader.cpp
 
 HEADERS += \
     configreader.h \
     cjsonreader.h \
-    cjson.h
+    cjson.h \
+    xmlreader.h
+
+DISTFILES +=
